@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends UserController
 {
 
-    const  GENDER_MALE = 'M';
+    const  GENDER_MALE   = 'M';
     const  GENDER_FEMALE = 'F';
     use IdTrait;
 
@@ -217,18 +217,7 @@ class User extends UserController
      */
     private $logo;
 
-    /**
-     * @ORM\Column()
-     * @Assert\Type("string")
-     */
-    private $compagny_name;
 
-    /**
-     * @ORM\Column(type="integer")
-     *  @Assert\Length(min = 9, max = 9, minMessage = "min_lenght", maxMessage = "max_lenght")
-     * @Assert\Type("integer")
-     */
-    private $siren;
 
     /**
      * @ORM\Column(type="integer")
@@ -371,6 +360,7 @@ class User extends UserController
     {
         return $this->job;
     }
+
 
     /**
      * @param mixed $job
