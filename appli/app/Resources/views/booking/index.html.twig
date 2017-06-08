@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+    <section id="main-teaser" class="teaser">
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                 <div style="margin-top: 8rem">
+                    <h1>Réservez votre Ménage <br />
+                        &nbsp&nbsp&nbsp&nbsp&nbsp dès 19,90€/h</h1>
+                       <br>
+                        <form class="" id="new_bid" action="{{ path('app_sitter_view') }}"  method="get">
+
+                                <input type ="text" class="text-blue"  maxlength="5" required="required" placeholder="Votre code postal" autocomplete="off"   name="postcode" id="postcode" size="40"  />
+                                <input type="submit" name="commit"  value="Chercher" class="btn-primary signup__button"  />
+
+                        </form>
+                    </div>
+
+            </div>
+        </div>
+
+    </section>
+    </div>
+{% endblock %}
