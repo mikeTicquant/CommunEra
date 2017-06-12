@@ -29,6 +29,27 @@ class User implements UserInterface
         // TODO: Implement __callStatic() method.
     }
 
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
 
     use IdTrait;
 
@@ -288,27 +309,6 @@ class User implements UserInterface
         return $this->first_name;
     }
 
-    public function getRoles()
-    {
-        return [
-            $this->role,
-        ];
-    }
-
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
-    public function getUsername()
-    {
-        return $this->getEmail();
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
 
 
     /**

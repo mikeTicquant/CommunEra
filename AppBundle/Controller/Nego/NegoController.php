@@ -9,13 +9,19 @@
 namespace AppBundle\Controller\Nego;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * @Route("/negoc")
+ */
 class NegoController extends Controller
 {
-
+    /**
+     * @Route()
+     */
     public function indexAction()
     {
-
+        return $this->render('nego/index.html.twig');
     }
 }
