@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Title here -->
+		<title>{% block title %}Back Office{% endblock %} » Au Petit Sud Ouest</title>
+		<!-- Description, Keywords and Author -->
+		<meta name="description" content="Your description">
+		<meta name="keywords" content="Your,Keywords">
+		<meta name="author" content="ResponsiveWebInc">
+      
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Google web fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+		
+		<!-- Styles -->
+		<!-- Bootstrap CSS -->
+		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/jquery-ui.theme.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('elfinder/css/elfinder.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('elfinder/css/theme.css') }}" rel="stylesheet">
+		<!-- Slider Revolution CSS -->
+		<link href="{{ asset('css/settings.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/bootstrap-switch.css') }}" rel="stylesheet">
+		<!--[if IE 8]>
+		<link rel="stylesheet" href="{{ asset('css/settings-ie8.css') }}">
+		<![endif]-->
+		<!-- Animate CSS -->
+		<link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+		<!-- jQuery prettyPhoto -->
+		<link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
+		<!-- Font awesome CSS -->
+		<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">		
+        <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
+		<!-- Custom CSS -->
+		<link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+		<!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="{{ asset('css/style-ie.css') }}" />
+		<![endif]-->
+            
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{{ asset('img/icon.png') }}">
+	</head>
+	
+	<body>
+{% if app.user.hasCrudPermission %}
+{% set isCrud = true %}
+{% else %}
+{% set isCrud = false %}
+{% endif %}
+{% if app.user.isFranchiseur %}
+{% set isFranchiseur = true %}
+{% else %}
+{% set isFranchiseur = false %}
+{% endif %}
+
+      <div class="out-container">
+         <div class="outer">
+            <!-- Sidebar starts -->
+            <div class="sidebar">
+                  <!-- Logo starts -->
+                  <div class="logo">
+                     <h1><a href="{{ path('pso_page_homepage') }}"><img width="200" src="{{ asset('img/logo.png') }}"></a></h1>
+                  </div>
+                  <!-- Logo ends -->
+
+                  <!-- Sidebar navigation starts -->
+				  
+				  <div class="sidebar-dropdown"><a href="#">Navigation</a></div>
+				  
+                  <div class="sidey">
+                     <ul class="nav">
+                         <!-- Main navigation. Refer Notes.txt files for reference. -->
+                         
+                         {% if app.user.isFranchiseur() %}
+                            <li><a href="{{ path('pso_franchise_index') }}"><i class="icon-globe"></i> Franchise</a></li>
+                            <li><a href="{{ path('reseaux') }}"><i class="icon-flag"></i> Réseaux</a></li>
+                            <li><a href="{{ path('restaurants') }}"><i class="icon-cutlery"></i> Restaurants</a></li>
+                         {% endif %}
+                                
+                         {% if app.user.isFSD() %}
+                            <li><a href="{{ path('utilisateur') }}"><i class="icon-group"></i> Utilisateurs</a></li>
+                         {% endif %}
+                                
+                         {% if not app.user.isFranchiseur() %}
+                        <li><a href="{{ path('reseau') }}"><i class="icon-flag"></i> Réseau</a></li>
+                        {% if app.user.restaurant is not null %}
+                        <li><a href="{{ path('restaurant') }}"><i class="icon-cutlery"></i> Restaurant</a></li>
+                        {% endif %}
+                        {% endif %}
+                         						 
+                         <li class="has_submenu">
+                             <a href="#">
+                                 <i class="icon-file"></i> Les modèles
+                                 <!-- Icon to show dropdown -->
+                                 <span class="caret pull-right"></span>
+                             </a>
+                             <!-- Sub navigation -->
+                             <ul>
+                                <!-- Use the class "active" in sub menu to hightlight current sub menu -->
+                                {% if app.user.isFranchiseur() %}
+                                <li><a href="{{ path('modele_menu') }}"><i class="icon-double-angle-right"></i> Modèles de menus</a></li>
+                                {% endif %}
+                                <li><a href="{{ path('menu') }}"><i class="icon-double-angle-right"></i> Menus</a></li>
+                             </ul>
+                         </li>
+						 <li class="has_submenu">
+                             <a href="#">
+                                 <i class="icon-comments"></i> Les produits
+                                 <!-- Icon to show dropdown -->
+                                 <span class="caret pull-right"></span>
+                             </a>
+                             <!-- Sub navigation -->
+                             <ul>
+                                 <!-- Use the class "active" in sub menu to hightlight current sub menu -->
+                                 <li><a href="{{ path('produit') }}"><i class="icon-double-angle-right"></i> Produits</a></li>
+                                 <li><a href="{{ path('fournisseur') }}"><i class="icon-double-angle-right"></i> Fournisseurs</a></li>
+                                 <li><a href="{{ path('correspondant') }}"><i class="icon-double-angle-right"></i> Correspondant</a></li>
+                                 {% if is_granted('ROLE_FRANCHISEUR') %}
+                                 <li><a href="{{ path('produit_secteur') }}"><i class="icon-double-angle-right"></i> Secteur</a></li>
+                                 <li><a href="{{ path('produit_conditionnement') }}"><i class="icon-double-angle-right"></i> Conditionnement</a></li>
+                                 <li><a href="{{ path('produit_unite') }}"><i class="icon-double-angle-right"></i> Unité de mesure</a></li>
+                                 {% endif %}
+                                 <!--<li><a href="#"><i class="icon-double-angle-right"></i> Mes listes</a></li>-->
+                             </ul>
+                         </li> 
+						 <li class="has_submenu">
+                             <a href="#">
+                                 <i class="icon-comments"></i> Les secrets
+                                 <!-- Icon to show dropdown -->
+                                 <span class="caret pull-right"></span>
+                             </a>
+                             <!-- Sub navigation -->
+                             <ul>
+                                 <!-- Use the class "active" in sub menu to hightlight current sub menu -->
+                                 <li><a href="{{ path('recette') }}"><i class="icon-double-angle-right"></i> Les recettes</a></li>
+                                 <li><a href="{{ path('recette_categorie') }}"><i class="icon-double-angle-right"></i> Catégorie recette</a></li>
+                                 <li><a href="{{ path('procedure') }}"><i class="icon-double-angle-right"></i> Les procédures</a></li>
+                             </ul>
+                         </li> 
+                         <li class="has_submenu">
+                           <a href="#">
+                              <i class="icon-bug"></i> Administratifs
+                              <span class="caret pull-right"></span>
+                           </a>
+                             <ul>
+                                 <li><a href="{{ path('papier') }}"><i class="icon-file"></i> Formats papier</a></li>
+                             </ul>
+                         </li>
+                     </ul>               
+                  </div>
+                  <!-- Sidebar navigation ends -->
+
+
+                  
+            </div>
+            <!-- Sidebar ends -->
+            
+            <!-- Mainbar starts -->
+            <div class="mainbar">
+                {% include '::topbar.html.twig' %}
+                {% block body %} 
+
+
+                {% endblock %}
+				
+                <!-- Footer Start -->
+
+				<div class="footer">
+					<div class="container">
+
+						<!-- Footer Copyright -->
+						<div class="footer-copyright">
+							<p>&copy; Copyright 2014 COGITOSUM</a></p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Footer End -->
+            </div>
+            <!-- Mainbar ends -->
+            
+            <div class="clearfix"></div>
+         </div>
+      </div>
+		
+		
+      
+      <!-- Scroll to top -->
+      <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
+		
+	  <!-- Javascript files -->
+	  <!-- jQuery -->
+	  <script src="{{ asset('js/jquery.js') }}"></script>
+	  <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+	  <script src="{{ asset('js/jquery.browser.min.js') }}"></script>
+	  <script src="{{ asset('elfinder/js/elfinder.min.js') }}"></script>
+	  <script src="{{ asset('elfinder/js/i18n/elfinder.fr.js') }}"></script>
+	  <!-- Bootstrap JS -->
+	  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	  <!-- Revolution Slider JS -->
+	  <script src="{{ asset('js/jquery.themepunch.revolution.min.js') }}"></script>
+	  <script src="{{ asset('js/jquery.themepunch.plugins.min.js') }}"></script>
+	  <!-- jQuery way points -->
+	  <script src="{{ asset('js/waypoints.min.js') }}"></script>
+	  <script src="{{ asset('js/sparkline.js') }}"></script>
+	  <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
+	  <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
+      <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
+      <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+      <script src="{{ asset('js/jquery.gritter.min.js') }}"></script>
+      <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+      <script src="{{ asset('js/jquery.dataTables.plugins.js') }}"></script>
+      <script src="{{ asset('js/bootstrap-switch.min.js') }}"></script>
+      <script src="{{ asset('assets/jscolor/jscolor.js') }}"></script>
+	  <!-- Pretty Photo And Isotope JS -->
+	  <script type="text/javascript" src="{{ asset('js/isotope.js') }}"></script>
+	  <script type="text/javascript" src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+	  <!-- Respond JS for IE8 -->
+	  <script src="{{ asset('js/respond.min.js') }}"></script>
+	  <!-- HTML5 Support for IE -->
+	  <script src="{{ asset('js/html5shiv.js') }}"></script>
+	  <!-- Custom JS -->
+	  <script src="{{ asset('js/custom.js') }}"></script>
+	  <script src="{{ asset('js/custom-admin.js') }}"></script>
+	  <script src="{{ asset('js/custom-pso.js') }}"></script>
+	  
+	  <!-- This page JS -->
+	  <script type="text/javascript">
+			//code here....
+	  </script>
+	  
+      {% block endjs %}
+      
+      {% endblock %}
+      
+	</body>	
+</html>
