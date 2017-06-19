@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="row">
+
+        <div class="col-sm-4 col-sm-offset-4">
+            <h1>Devenir sitter</h1>
+            <p>L'inscription prend juste deux minutes, et une fois que vous l'avez complétée nous allons programmer un appel téléphonique avec vous .</p>
+            {{ form_start(sitterForm,{attr:{novalidate:'novalidate'}}) }}
+            {{ form_row(sitterForm.firstname) }}
+            {{ form_row(sitterForm.lastname) }}
+            {{ form_row(sitterForm.cp) }}
+            {{ form_row(sitterForm.ville) }}
+            {{ form_row(sitterForm.mission) }}
+            {{ form_row(sitterForm.tel) }}
+            {{ form_row(sitterForm.description) }}
+            {{ form_row(sitterForm.email) }}
+            {{ form_row(sitterForm.dispo) }}
+            {{ form_row(sitterForm.password) }}
+
+            <input type="submit" class="btn btn-success btn-block">
+            {{ form_end(sitterForm) }}
+        </div>
+    </div>
+
+{% endblock %}

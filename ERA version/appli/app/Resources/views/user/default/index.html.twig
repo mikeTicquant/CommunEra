@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>{{ app.user.firstname }} {{ app.user.lastname|upper }}</h1>
+        <div class="row">
+            <div class="col-sm-4">
+                {% set filename = app.user.photo|default('default.png') %}
+                {% set url = globalUserPhotoUri ~ '/' ~ filename %}
+                <img class="img-thumbnail" id="photo" src="{{ asset(url) }}"/>
+                <div class="hide">
+                    {{ form(formPhoto) }}
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <h2>Détails du profil</h2>
+                {{ form(formDetails) }}
+            </div>
+        </div>
+        <h2>Mot de passe</h2>
+        {{ form(formPassword) }}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('#photo').wrap('<a href="#"></a>').on('click', function () {
+                $('#form_user_photo_photoFile').click();
+            });
+            $('#form_user_photo_photoFile').on('change', function () {
+                $('form[name="form_user_photo"]').submit();
+            });
+        });
+    </script>
+{% endblock %}

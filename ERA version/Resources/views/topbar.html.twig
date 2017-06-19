@@ -1,0 +1,32 @@
+<div class="page-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                <span class="ph-misc">
+                    {% if app.user.reseau is not null %}
+                    <a href="{{ path('reseau') }}"><i class="icon-flag"></i> {{ app.user.reseau }}</a> 
+                    {% endif %}
+                    {% if app.user.restaurant is not null %}
+                    <a href="{{ path('restaurant') }}"><i class="icon-cutlery"></i> {{ app.user.restaurant }}</a> 
+                    {% endif %}
+                    <a href="#"><i class="icon-user"></i> {{ app.user.username }}</a> 
+                    <span class="label label-danger">
+                    {% if app.user.isFranchiseur() %}Franchiseur
+                    {% elseif app.user.isSuperviseur() %}Superviseur
+                    {% elseif app.user.isDirecteur() %}Directeur
+                    {% else %}Employé
+                    {% endif %}</span> 
+                </span>
+            </div>
+
+            <!-- Icons -->
+            <div class="col-xs-2">
+                <span class="ph-misc pull-right">
+                    <a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i></a> 
+                </span>
+                <div class="clearfix"></div>
+            </div>	
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

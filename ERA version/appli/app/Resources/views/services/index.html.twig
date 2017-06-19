@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container">
+
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-4">
+                <div class="card" style="width: 20rem; margin-bottom: 2rem">
+                    <img class="card-img-top" src="..." alt="Card image">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ service.title }}</h4>
+                        <p class="card-text">{{ service.description}}</p>
+                        <a href="#" class="btn btn-primary">{{ service.tarif}}</a>
+                    </div>
+                </div>
+            </div>
+
+    {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
+

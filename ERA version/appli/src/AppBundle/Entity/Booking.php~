@@ -1,0 +1,124 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Booking
+ *
+ * @ORM\Table(name="booking")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
+ */
+class Booking
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_booking", type="string", length=255)
+     */
+    private $dateBooking;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_depart", type="string", length=255)
+     */
+    private $dateDepart;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_arrived", type="string", length=255)
+     */
+    private $dateArrived;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateBooking
+     *
+     * @param string $dateBooking
+     * @return Booking
+     */
+    public function setDateBooking($dateBooking)
+    {
+        $this->dateBooking = $dateBooking;
+
+        return $this;
+    }
+
+    /**
+     * Get dateBooking
+     *
+     * @return string 
+     */
+    public function getDateBooking()
+    {
+        return $this->dateBooking;
+    }
+
+    /**
+     * Set dateDepart
+     *
+     * @param string $dateDepart
+     * @return Booking
+     */
+    public function setDateDepart($dateDepart)
+    {
+        $this->dateDepart = $dateDepart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDepart
+     *
+     * @return string 
+     */
+    public function getDateDepart()
+    {
+        return $this->dateDepart;
+    }
+
+    /**
+     * Set dateArrived
+     *
+     * @param string $dateArrived
+     * @return Booking
+     */
+    public function setDateArrived($dateArrived)
+    {
+        $this->dateArrived = $dateArrived;
+
+        return $this;
+    }
+
+    /**
+     * Get dateArrived
+     *
+     * @return string 
+     */
+    public function getDateArrived()
+    {
+        return $this->dateArrived;
+    }
+}

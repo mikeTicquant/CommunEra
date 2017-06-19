@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony-clean
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host:    10.2.0.143
+    mailer_user: null
+    mailer_password: null
+    mailer_port:  1025
+    mailer_from: 'no-reply@rabi.com'
+    mailer_to: 'soussi.rabii@gmail.com'
+    secret: 6766ff0f5833cac4d4bb2d8df3cbac9dd3143551
+    user_photo_uri: 'files'
+    user_photo_path: '%kernel.root_dir%/../web/%user_photo_uri%'

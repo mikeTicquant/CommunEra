@@ -1,0 +1,56 @@
+{% extends "admin/template.html.twig" %}
+{% block body %}
+
+    <ul class="list-inline">
+        <li>
+            <a class="btn btn-xs btn-success" href="{{ path('app_admin_user_create') }}">
+                <span class="fa fa-plus"></span>
+                Créer
+            </a>
+        </li>
+    </ul>
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Ville</th>
+                <th>E-mail</th>
+                <th>Code postal</th>
+                <th>Role</th>
+                <th colspan="2" class="sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set _token = csrf_token('USER_DELETE') %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.ville }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.cp }}</td>
+                    <td>{{ user.role }}</td>
+                    <td class="sm">
+                        <a class="btn btn-xs btn-warning" href="{{ path('app_admin_user_update',{id:user.id}) }}">
+                            <span class="fa fa-pencil"></span>
+                            Modifier
+                        </a>
+                    </td>
+                    <td class="sm">
+                        <a class="btn btn-xs btn-danger" href="{{ path('app_admin_user_delete',{id:user.id,_token:_token}) }}">
+                            <span class="fa fa-trash-o"></span>
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
